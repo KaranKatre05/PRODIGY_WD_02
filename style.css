@@ -1,0 +1,153 @@
+:root {
+    --primary-color: #00d2ff;
+    --secondary-color: #9715e9;
+    --accent-pink: #ff367e;
+    --dark-bg: #0f0c29;
+    --glass: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- 1. Animated Background --- */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #270a38);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- Main Card & Entrance Animation --- */
+.app-container {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    text-align: center;
+    width: 360px;
+    /* Entrance Anim */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header h3 { color: var(--primary-color); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;}
+header h1 { font-size: 2rem; margin-bottom: 25px; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+
+/* --- Timer Display --- */
+.timer-box {
+    background: rgba(0,0,0,0.3);
+    padding: 15px 0;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.3s ease;
+}
+
+/* The pulse animation class added by JS */
+.timer-box.running {
+    animation: subtlePulse 2s infinite;
+    border-color: rgba(0, 210, 255, 0.3);
+}
+
+@keyframes subtlePulse {
+    0% { box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 5px rgba(0, 210, 255, 0.1); }
+    50% { box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 20px rgba(0, 210, 255, 0.3); }
+    100% { box-shadow: inset 0 0 15px rgba(0,0,0,0.5), 0 0 5px rgba(0, 210, 255, 0.1); }
+}
+
+.time-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
+/* --- Buttons & Interactions --- */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.sub-controls { display: flex; gap: 15px; }
+
+.btn {
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+    color: white;
+    flex: 1;
+}
+
+/* Hover and Click Animations */
+.btn:hover:not(:disabled) { transform: translateY(-3px); filter: brightness(1.1); }
+.btn:active:not(:disabled) { transform: scale(0.95) translateY(0); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.start-btn { background: linear-gradient(to right, var(--primary-color), #3a7bd5); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+/* Class added when timer is running */
+.start-btn.active-state { background: linear-gradient(to right, var(--accent-pink), #ff4b2b); box-shadow: 0 5px 15px rgba(255, 54, 126, 0.3); }
+
+.lap-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+.reset-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--accent-pink); }
+
+/* --- Laps Area & Slide-in Animation --- */
+.laps-container {
+    height: 120px;
+    overflow-y: auto;
+    /* Custom Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--glass) transparent;
+}
+
+#lapsList { list-style: none; }
+
+#lapsList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--primary-color);
+    
+    /* Lap entrance animation */
+    animation: slideInLeft 0.4s ease forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+@keyframes slideInLeft {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.lap-number { color: var(--primary-color); font-weight: bold;}

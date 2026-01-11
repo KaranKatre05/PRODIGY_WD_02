@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task-02 Animated Stopwatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h3>Task-02</h3>
+            <h1>Stopwatch</h1>
+        </header>
+
+        <div class="timer-box" id="timerBox">
+            <span class="time-text" id="display">00:00:00</span>
+        </div>
+
+        <div class="controls">
+            <button id="startStopBtn" class="btn start-btn">Start</button>
+            <div class="sub-controls">
+                <button id="lapBtn" class="btn lap-btn" disabled>Lap</button>
+                <button id="resetBtn" class="btn reset-btn" disabled>Reset</button>
+            </div>
+        </div>
+
+        <div class="laps-container">
+            <ul id="lapsList">
+                </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
